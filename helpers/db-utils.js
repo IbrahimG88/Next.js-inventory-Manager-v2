@@ -23,3 +23,21 @@ export async function getAllDocuments(client, collection, sort) {
 
   return documents;
 }
+
+export async function postManyDocuments(client, collection, arrayToInsert) {
+  const db = client.db();
+  const date = new Date();
+  arrayToInsert.forEach((element) => {
+    element.date = date;
+  });
+
+  if (
+    (await arrayToInsert.length) ===
+    (await db.collection(collection).countDocuments({}))
+  ) {
+    return null;
+  } else {
+    const documents = db.collection(collection).insertMany(arrayToInsert);
+    return documents;
+  }
+}

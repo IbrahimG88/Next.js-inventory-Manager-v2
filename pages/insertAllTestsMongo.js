@@ -1,5 +1,3 @@
-// not used anymore in the app just read it
-
 import { useRouter } from "next/router";
 
 export const getStaticProps = async () => {
@@ -31,9 +29,9 @@ function LoadInventoryFromLIS(props) {
   async function addInventoryItemHandler() {
     console.log(testsList);
     // use of Fetch API to make a request to the new-meal api and get back a response
-    await fetch("/api/basicHandler", {
+    await fetch("/api/insertTestsHandler", {
       method: "POST",
-      body: JSON.stringify(testsList[0]),
+      body: JSON.stringify(testsList),
       headers: {
         "content-Type": "application/json",
       },
@@ -53,12 +51,12 @@ function LoadInventoryFromLIS(props) {
 
   return (
     <div>
+      <button onClick={addInventoryItemHandler}>CLick me to load tests</button>
       <ul>
         {testsList.map((test) => (
           <li key={test.id}> {test.testName}</li>
         ))}
       </ul>
-      <button onClick={addInventoryItemHandler}>CLick me to load tests</button>
     </div>
   );
 }
