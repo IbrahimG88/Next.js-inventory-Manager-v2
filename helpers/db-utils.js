@@ -16,11 +16,11 @@ export async function insertDocument(client, collection, document) {
   return result;
 }
 
-export async function getAllDocuments(client, collection, sort) {
+export async function getAllDocuments(client, collection) {
   const db = client.db();
 
-  const documents = await db.collection(collection).find().sort(sort).toArray();
-
+  const documents = await db.collection(collection).find({}).toArray();
+  console.log(documents);
   return documents;
 }
 
