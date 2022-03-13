@@ -1,29 +1,26 @@
 /* eslint-disable react/jsx-key */
-import { useTable } from "react-table";
-import React, {useState, useEffect} from "react";
+import { useTable, useFilters } from "react-table";
+import React, {useState, useEffect, Fragment} from "react";
 
 
 export default function App() {
-   /*const [sales, setSales ]= useState();
-    useEffect(() => {
-    fetch("api/getAllTestsHandler")
-    .then((response) => response.json())
-    .then((data) => {
-      //data from firebase will be returned as an object and nested ones
-      const transformedSales = []; // to transform an object into an array
-      for (const key in data) {
-        transformedSales.push({
-          col1: data[key].id,
-          col2: data[key].testName,
-        });
-      }
-      setSales(transformedSales);
-    });
-}, []);*/ 
+  
+
+const [filterInput, setFilterInput] = useState("");
+
+
+// Update the state when input changes
+const handleFilterChange = e => {
+    const value = e.target.value || undefined;
+    setFilter("col2", value); // Update the show.name filter. Now our table will filter and show only the rows which have a matching value
+
+    setFilterInput(value);
+  };
+
 const [data, setData] = useState([]);
 
 // Using useEffect to call the API once mounted and set the data
-useEffect(() => {
+useEffect( () => {
     fetch("api/getAllTestsHandler")
     .then((response) => response.json())
     .then((data) => {
@@ -36,14 +33,9 @@ useEffect(() => {
         });
       }
       setData(transformedSales);
-      console.log(data)
+  
     });
 }, [])
-
-
-
-
-
 
   
 
@@ -61,12 +53,24 @@ useEffect(() => {
     []
   );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data });
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow ,  setFilter // The useFilter Hook provides a way to set the filter
+} =
+    useTable({ columns, data }, useFilters);
 
   return (
+<Fragment>
+    <input
+    value={filterInput}
+    onChange={handleFilterChange}
+    placeholder={"Search name"}
+  />
+
     <table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
+  
+
+
     <thead>
+  
       {headerGroups.map(headerGroup => (
         <tr {...headerGroup.getHeaderGroupProps()}>
           {headerGroup.headers.map(column => (
@@ -109,6 +113,7 @@ useEffect(() => {
       })}
     </tbody>
   </table>
+  </Fragment>
 )
   
 }
