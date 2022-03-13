@@ -198,10 +198,10 @@ const headCells = [
     label: "Protein (g)",
   },
   {
-    id: "price",
+    id: "history",
     numeric: true,
     disablePadding: false,
-    label: "Price",
+    label: "History",
   },
 ];
 
