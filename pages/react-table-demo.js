@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import { useTable, useFilters } from "react-table";
+import { useTable, useFilters, useSortBy } from "react-table";
 import React, {useState, useEffect, Fragment} from "react";
 
 
@@ -63,7 +63,7 @@ useEffect( () => {
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow ,  setFilter // The useFilter Hook provides a way to set the filter
 } =
-    useTable({ columns, data }, useFilters);
+    useTable({ columns, data }, useFilters, useSortBy);
 
   return (
 <Fragment>
@@ -88,13 +88,20 @@ useEffect( () => {
         <tr {...headerGroup.getHeaderGroupProps()}>
           {headerGroup.headers.map(column => (
             <th
-              {...column.getHeaderProps()}
+              {...column.getHeaderProps(column.getSortByToggleProps())}
               style={{
                 borderBottom: 'solid 3px red',
                 background: 'aliceblue',
                 color: 'black',
                 fontWeight: 'bold',
               }}
+              className={
+                column.isSorted
+                  ? column.isSortedDesc
+                    ? "sort-desc "
+                    : "sort-asc"
+                  : ""
+              }
             >
               {column.render('Header')}
             </th>
