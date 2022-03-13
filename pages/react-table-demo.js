@@ -17,6 +17,14 @@ const handleFilterChange = e => {
     setFilterInput(value);
   };
 
+  const handleFilterChangeById = e => {
+    const value = e.target.value || undefined;
+    setFilter("col1", value); // Update the show.name filter. Now our table will filter and show only the rows which have a matching value
+
+    setFilterInput(value);
+  };
+
+
 const [data, setData] = useState([]);
 
 // Using useEffect to call the API once mounted and set the data
@@ -62,7 +70,12 @@ useEffect( () => {
     <input
     value={filterInput}
     onChange={handleFilterChange}
-    placeholder={"Search name"}
+    placeholder={"Search testname"}
+  />
+  <input
+    value={filterInput}
+    onChange={handleFilterChangeById}
+    placeholder={"Search id"}
   />
 
     <table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
