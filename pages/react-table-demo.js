@@ -2,9 +2,29 @@
 import { useTable, useFilters, useSortBy } from "react-table";
 import React, {useState, useEffect, Fragment} from "react";
 
+const handleChange = (e, rowTestName, rowIndex ) => {
+  
+
+ const { value } = e.target;
+//still to work on:const itemToChange = data.find((item)=>item.testName ==)
+ 
+console.log("rowtestname",rowTestName)
+ 
+console.log("rowIndex",rowIndex)
+//  const newData = [...data];
+//  newData[index] = {
+//    ...newData[index],
+//    [name]: value,
+//  };
+//  console.log("newData", newData);
+//     data = newData;
+//     console.log("data", data);
+//     return data;
+};
 
 export default function App() {
-  
+
+
 
 const [filterInput, setFilterInput] = useState("");
 
@@ -57,6 +77,17 @@ useEffect( () => {
         Header: "Column 2",
         accessor: "col2",
       },
+      {
+        Header: "Genre(s)",
+        accessor: "col3",
+      
+
+        // Cell method will provide the cell value; we pass it to render a custom component
+        Cell: ({ cell: { row,value } }) =>    <input
+        type="number"
+        onChange={(value) => handleChange(value, row.original.col2, row.original.col1)}
+      />
+      },
     ],
     []
   );
@@ -100,8 +131,8 @@ useEffect( () => {
               <span>
                     {column.isSorted
                       ? column.isSortedDesc
-                        ? ' 🔽'
-                        : ' 🔼'
+                        ? ' 🔽 descending'
+                        : ' 🔼 ascending'
                       : ''}
                   </span>
                 </th>
