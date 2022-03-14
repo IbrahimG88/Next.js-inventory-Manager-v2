@@ -94,19 +94,19 @@ useEffect( () => {
                 background: 'aliceblue',
                 color: 'black',
                 fontWeight: 'bold',
-              }}
-              className={
-                column.isSorted
-                  ? column.isSortedDesc
-                    ? "sort-desc "
-                    : "sort-asc"
-                  : ""
-              }
-            >
+              }}>
               {column.render('Header')}
-            </th>
-          ))}
-        </tr>
+              {/* Add a sort direction indicator */}
+              <span>
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? ' 🔽'
+                        : ' 🔼'
+                      : ''}
+                  </span>
+                </th>
+              ))}
+            </tr>
       ))}
     </thead>
     <tbody {...getTableBodyProps()}>
