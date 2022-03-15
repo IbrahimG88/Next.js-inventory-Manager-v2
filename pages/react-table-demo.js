@@ -2,30 +2,10 @@
 import { useTable, useFilters, useSortBy } from "react-table";
 import React, {useState, useEffect, Fragment} from "react";
 
-import { Table, Thead, Tbody, Tr, Th, Td, chakra, Input } from '@chakra-ui/react'
+import { Table, Thead, Tbody, Tr, Th, Td, chakra, Input, Button } from '@chakra-ui/react'
 import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons'
 
 
-
-const handleChange = (e, rowTestName, rowIndex ) => {
-  
-
- const { value } = e.target;
-//still to work on:const itemToChange = data.find((item)=>item.testName ==)
- 
-console.log("rowtestname",rowTestName)
- 
-console.log("rowIndex",rowIndex)
-//  const newData = [...data];
-//  newData[index] = {
-//    ...newData[index],
-//    [name]: value,
-//  };
-//  console.log("newData", newData);
-//     data = newData;
-//     console.log("data", data);
-//     return data;
-};
 
 export default function App() {
 
@@ -33,6 +13,32 @@ export default function App() {
 
 const [filterInputTest, setFilterInputTest] = useState("");
 const [filterInputId, setFilterInputId] = useState("");
+
+const handleTotalStocks = (e, addStocksValue) => {
+  return e.target.value+= addStocksValue
+
+}
+
+const handleKeyPress = (e) => {
+  if(e.key === 'Enter'){
+  console.log( "You pressed a key." )
+  console.log("rowAddStocks", e.target.value);
+  e.target.value = "";
+  }
+}
+
+const handleChange = (e, rowTestName, rowIndex ) => {
+  
+
+  const { value } = e.target;
+ //still to work on:const itemToChange = data.find((item)=>item.testName ==)
+
+ console.log("rowtestname",rowTestName)
+  
+ console.log("rowIndex",rowIndex)
+
+
+ };
 
 // Update the state when input changes
 const handleFilterChange = e => {
@@ -83,16 +89,20 @@ useEffect( () => {
         accessor: "col2",
       },
       {
-        Header: "Genre(s)",
+        Header: "Add Stocks",
         accessor: "col3",
       
 
         // Cell method will provide the cell value; we pass it to render a custom component
-        Cell: ({ cell: { row,value } }) =>    <Input
+        Cell: ({ cell: { row,value } }) =>  <Fragment><Input
         type="number"
         onChange={(value) => handleChange(value, row.original.col2, row.original.col1)}
+        onKeyPress={(e) => handleKeyPress(e,row.original.col4)}
       />
+      
+      </Fragment> 
       },
+
     ],
     []
   );
