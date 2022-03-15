@@ -2,6 +2,11 @@
 import { useTable, useFilters, useSortBy } from "react-table";
 import React, {useState, useEffect, Fragment} from "react";
 
+import { Table, Thead, Tbody, Tr, Th, Td, chakra, Input } from '@chakra-ui/react'
+import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons'
+
+
+
 const handleChange = (e, rowTestName, rowIndex ) => {
   
 
@@ -26,22 +31,22 @@ export default function App() {
 
 
 
-const [filterInput, setFilterInput] = useState("");
-
+const [filterInputTest, setFilterInputTest] = useState("");
+const [filterInputId, setFilterInputId] = useState("");
 
 // Update the state when input changes
 const handleFilterChange = e => {
     const value = e.target.value || undefined;
     setFilter("col2", value); // Update the show.name filter. Now our table will filter and show only the rows which have a matching value
 
-    setFilterInput(value);
+    setFilterInputTest(value);
   };
 
   const handleFilterChangeById = e => {
     const value = e.target.value || undefined;
     setFilter("col1", value); // Update the show.name filter. Now our table will filter and show only the rows which have a matching value
 
-    setFilterInput(value);
+    setFilterInputId(value);
   };
 
 
@@ -83,7 +88,7 @@ useEffect( () => {
       
 
         // Cell method will provide the cell value; we pass it to render a custom component
-        Cell: ({ cell: { row,value } }) =>    <input
+        Cell: ({ cell: { row,value } }) =>    <Input
         type="number"
         onChange={(value) => handleChange(value, row.original.col2, row.original.col1)}
       />
@@ -98,27 +103,27 @@ useEffect( () => {
 
   return (
 <Fragment>
-    <input
-    value={filterInput}
+    <Input
+    value={filterInputTest}
     onChange={handleFilterChange}
     placeholder={"Search testname"}
   />
-  <input
-    value={filterInput}
+  <Input
+    value={filterInputId}
     onChange={handleFilterChangeById}
     placeholder={"Search id"}
   />
 
-    <table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
+    <Table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
   
 
 
-    <thead>
+    <Thead>
   
       {headerGroups.map(headerGroup => (
-        <tr {...headerGroup.getHeaderGroupProps()}>
+        <Tr {...headerGroup.getHeaderGroupProps()}>
           {headerGroup.headers.map(column => (
-            <th
+            <Th
               {...column.getHeaderProps(column.getSortByToggleProps())}
               style={{
                 borderBottom: 'solid 3px red',
@@ -131,23 +136,23 @@ useEffect( () => {
               <span>
                     {column.isSorted
                       ? column.isSortedDesc
-                        ? ' 🔽 descending'
-                        : ' 🔼 ascending'
+                        ?   <TriangleDownIcon aria-label='sorted descending' />
+                        :     <TriangleUpIcon aria-label='sorted ascending' />
                       : ''}
                   </span>
-                </th>
+                </Th>
               ))}
-            </tr>
+            </Tr>
       ))}
-    </thead>
-    <tbody {...getTableBodyProps()}>
+    </Thead>
+    <Tbody {...getTableBodyProps()}>
       {rows.map(row => {
         prepareRow(row)
         return (
-          <tr {...row.getRowProps()}>
+          <Tr {...row.getRowProps()}>
             {row.cells.map(cell => {
               return (
-                <td
+                <Td
                   {...cell.getCellProps()}
                   style={{
                     padding: '10px',
@@ -156,14 +161,14 @@ useEffect( () => {
                   }}
                 >
                   {cell.render('Cell')}
-                </td>
+                </Td>
               )
             })}
-          </tr>
+          </Tr>
         )
       })}
-    </tbody>
-  </table>
+    </Tbody>
+  </Table>
   </Fragment>
 )
   
