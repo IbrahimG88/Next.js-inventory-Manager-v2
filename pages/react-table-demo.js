@@ -14,29 +14,47 @@ export default function App() {
 const [filterInputTest, setFilterInputTest] = useState("");
 const [filterInputId, setFilterInputId] = useState("");
 
-const handleTotalStocks = (e, addStocksValue) => {
-  return e.target.value+= addStocksValue
 
-}
 
-const handleKeyPress = (e) => {
+const handleKeyPress = (e, x) => {
   if(e.key === 'Enter'){
   console.log( "You pressed a key." )
   console.log("rowAddStocks", e.target.value);
+  console.log("x",x)
   e.target.value = "";
   }
 }
 
-const handleChange = (e, rowTestName, rowIndex ) => {
+//const customAccessor = (originalRow, rowIndex) => {
+// console.log("v",originalRow)
+ //console.log("ts",rowIndex)
+// const itemValue = data[rowIndex].col4 + data[rowIndex].col3
+//console.log("itemValue",itemValue);
+// return itemValue
+//}
+
+const handleChange = (e,row) => {
   
 
   const { value } = e.target;
+
  //still to work on:const itemToChange = data.find((item)=>item.testName ==)
+ /*
+  console.log("row index",row.original.col1)
 
- console.log("rowtestname",rowTestName)
+ console.log( "itemv",value )
+  console.log( "itemxx", row.original )
+  console.log( "itemxx", value )
+  console.log( "col4", row.original.col4)
+ //value = data[]
+ 
+
+
   
- console.log("rowIndex",rowIndex)
-
+ console.log( "itemcol4",row.original.col4 )
+ 
+*/
+ //customAccessor(value, rowIndex)
 
  };
 
@@ -96,13 +114,17 @@ useEffect( () => {
         // Cell method will provide the cell value; we pass it to render a custom component
         Cell: ({ cell: { row,value } }) =>  <Fragment><Input
         type="number"
-        onChange={(value) => handleChange(value, row.original.col2, row.original.col1)}
-        onKeyPress={(e) => handleKeyPress(e,row.original.col4)}
+        onChange={(value) => handleChange(value, row)}
+        onKeyPress={(e) => handleKeyPress(e,row.original.col2)}
       />
-      
+        {value}
       </Fragment> 
       },
-
+      {
+        Header: "Total Stocks",
+        accessor: "col4" ,
+         
+    }
     ],
     []
   );
