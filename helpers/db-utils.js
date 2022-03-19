@@ -47,7 +47,7 @@ export async function getSingleDocument(client, collection, itemId) {
 
   const document = await db
     .collection(collection)
-    .findOne({ id: itemId })
+    .find({ id: itemId })
     .toArray();
   console.log(document);
   return document;

@@ -1,5 +1,5 @@
-//import { connectDatabase, getSingleDocument } from "../../helpers/db-utils";
-/*
+import { connectDatabase, getSingleDocument } from "../../../helpers/db-utils";
+
 async function handler(req, res) {
   if (req.method === "GET") {
     let client;
@@ -12,11 +12,15 @@ async function handler(req, res) {
     }
 
     try {
-      const { id } = req.query;
-      console.log("id", id);
-      const item = await getSingleDocument(client, "inventory", id);
+      const queryId = req.query.pid;
+
+      const item = await getSingleDocument(
+        client,
+        "inventory",
+        Number(queryId)
+      );
       console.log("item", res.json(item));
-      return res.json(item);
+      res.json(item);
     } catch (error) {
       res.status(500).json({ message: "Inserting data failed!" });
       return;
@@ -28,7 +32,7 @@ async function handler(req, res) {
 }
 export default handler;
 
-*/
+/*
 import { connectDatabase, getSingleDocument } from "../../../helpers/db-utils";
 //working
 export default async (req, res) => {
@@ -42,3 +46,5 @@ export default async (req, res) => {
     .toArray();
   res.json(item);
 };
+
+*/
