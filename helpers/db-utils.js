@@ -41,3 +41,14 @@ export async function postManyDocuments(client, collection, arrayToInsert) {
     return documents;
   }
 }
+
+export async function getSingleDocument(client, collection, itemId) {
+  const db = client.db();
+
+  const document = await db
+    .collection(collection)
+    .findOne({ id: itemId })
+    .toArray();
+  console.log(document);
+  return document;
+}

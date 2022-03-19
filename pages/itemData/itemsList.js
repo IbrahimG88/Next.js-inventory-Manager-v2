@@ -10,15 +10,22 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { useEffect, useState, Fragment } from "react";
+import { useRouter } from "next/router";
 
 export default function ItemsList() {
   const [sales, setSales] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [filter, setFilter] = useState("");
 
+  const router = useRouter();
+
   function handleClick(test, index) {
     console.log("clickname", test);
     console.log("clickindex", index);
+
+    router.push({
+      pathname: `/itemData/${index}`,
+    });
   }
 
   useEffect(() => {

@@ -106,6 +106,7 @@ useEffect( () => {
         Header: "Column 2",
         accessor: "col2",
       },
+      /*
       {
         Header: "Add Stocks",
         accessor: "col3",
@@ -120,11 +121,8 @@ useEffect( () => {
         {value}
       </Fragment> 
       },
-      {
-        Header: "Total Stocks",
-        accessor: "col4" ,
-         
-    }
+      */
+    
     ],
     []
   );
