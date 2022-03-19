@@ -17,8 +17,8 @@ export default function ItemId() {
   // thats the data we get from that request
 
   useEffect(() => {
-    console.log("data", data);
     if (data) {
+      console.log("data", data);
       setItemFound(data);
     }
   }, [data]);
