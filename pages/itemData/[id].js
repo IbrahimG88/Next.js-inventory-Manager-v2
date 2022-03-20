@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
+
+import { Container, Text, Box } from "@chakra-ui/react";
 
 import useSWR from "swr";
 
@@ -32,5 +34,17 @@ export default function ItemId() {
   console.log("pathname", router.pathname); // project/[projectid]
   console.log("query", router.query); // project/thename <anyprojectid>
 
-  return <p>I am an ID</p>;
+  return (
+    <Fragment>
+      {itemFound.map((item) => (
+        <Container centerContent maxW="container.lg" key={item._id}>
+          <Box>
+            <Text>
+              {item.id} - {item.testName}
+            </Text>
+          </Box>
+        </Container>
+      ))}
+    </Fragment>
+  );
 }
