@@ -32,6 +32,7 @@ export default function ItemsList() {
     console.log("name", name);
     console.log("value", value);
     const newSales = [...sales];
+
     newSales[i] = {
       ...newSales[i],
       [name]: value,
@@ -40,6 +41,12 @@ export default function ItemsList() {
     sales = newSales;
     console.log("sales", sales);
     setSales(sales);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.target.value = "";
+    }
   };
 
   useEffect(() => {
@@ -53,6 +60,7 @@ export default function ItemsList() {
           transformedSales.push({
             id: data[key].id,
             testName: data[key].testName,
+            date: data[key].date,
           });
         }
         setSales(transformedSales);
@@ -100,6 +108,7 @@ export default function ItemsList() {
                 id="amountsInStock"
                 value={amountsInput}
                 onChange={(e) => handleChange(e, index)}
+                onKeyDown={(e) => handleKeyDown(e)}
               />
             </AccordionPanel>
           </AccordionItem>
