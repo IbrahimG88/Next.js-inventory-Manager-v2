@@ -85,7 +85,7 @@ export default function ItemsList() {
         .map((item, index) => (
           <AccordionItem key={item._id}>
             <h2>
-              <AccordionButton>
+              <AccordionButton _expanded={{ bg: "blue", color: "white" }}>
                 <Box flex="1" textAlign="left">
                   {item.testName}
                 </Box>
