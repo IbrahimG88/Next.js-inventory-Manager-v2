@@ -54,52 +54,36 @@ export default function ItemsList() {
   }
 
   return (
-    <Fragment>
-      <p>
-        Type to filter the list:
-        <Input
-          id="filter"
-          name="filter"
-          type="text"
-          value={filter}
-          onChange={(event) => setFilter(event.target.value)}
-        />
-      </p>
-      <Accordion defaultIndex={[0]} allowMultiple>
-        <AccordionItem>
-          <h2>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                Section 1 title
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </AccordionPanel>
-        </AccordionItem>
-
-        <AccordionItem>
-          <h2>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                Section 2 title
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
-    </Fragment>
+    <Accordion allowToggle>
+      Type to filter the list:
+      <Input
+        id="filter"
+        name="filter"
+        type="text"
+        value={filter}
+        placeholder="search for test..."
+        onChange={(event) => setFilter(event.target.value)}
+      />
+      {sales
+        .filter((f) => f.testName.indexOf(filter) > -1)
+        .map((item) => (
+          <AccordionItem key={item._id}>
+            <h2>
+              <AccordionButton>
+                <Box flex="1" textAlign="left">
+                  {item.testName}
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </AccordionPanel>
+          </AccordionItem>
+        ))}
+    </Accordion>
   );
 }
