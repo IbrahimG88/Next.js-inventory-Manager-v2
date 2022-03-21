@@ -14,6 +14,7 @@ export default function ItemsList() {
   const [sales, setSales] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [filter, setFilter] = useState("");
+  let amountsInput;
 
   const router = useRouter();
 
@@ -25,6 +26,21 @@ export default function ItemsList() {
       pathname: `/itemData/${index}`,
     });
   }
+
+  const handleChange = (e, i) => {
+    const { value, name } = e.target;
+    console.log("name", name);
+    console.log("value", value);
+    const newSales = [...sales];
+    newSales[i] = {
+      ...newSales[i],
+      [name]: value,
+    };
+    console.log("newSales", newSales);
+    sales = newSales;
+    console.log("sales", sales);
+    setSales(sales);
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -66,7 +82,7 @@ export default function ItemsList() {
       />
       {sales
         .filter((f) => f.testName.indexOf(filter) > -1)
-        .map((item) => (
+        .map((item, index) => (
           <AccordionItem key={item._id}>
             <h2>
               <AccordionButton>
@@ -77,10 +93,14 @@ export default function ItemsList() {
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              <Input
+                placeholder="stocks to add..."
+                type="number"
+                name="amountsInStock"
+                id="amountsInStock"
+                value={amountsInput}
+                onChange={(e) => handleChange(e, index)}
+              />
             </AccordionPanel>
           </AccordionItem>
         ))}
