@@ -42,8 +42,9 @@ export default function ItemsList() {
     setSales(sales);
   };
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event, index) => {
     if (event.key === "Enter") {
+      updateItemHandler(index);
       event.target.value = "";
     }
   };
@@ -57,8 +58,10 @@ export default function ItemsList() {
         const transformedSales = []; // to transform an object into an array
         for (const key in data) {
           transformedSales.push({
+            _id: data[key]._id,
             id: data[key].id,
             testName: data[key].testName,
+            totalStocks: data[key].TotalStocks,
             date: data[key].date,
           });
         }
@@ -67,6 +70,27 @@ export default function ItemsList() {
         console.log("sss", transformedSales);
       });
   }, []);
+
+  async function updateItemHandler(itemIndex) {
+    console.log("itemIndex", itemIndex);
+    sales[itemIndex];
+    const updateObject = {
+      id: sales[itemIndex].id,
+      stocksAdded: sales[itemIndex].stocksAdded,
+    };
+
+    console.log("sales[itemIndex]", updateObject);
+
+    await fetch("/api/updateItem", {
+      method: "POST",
+      body: JSON.stringify(updateObject),
+      headers: {
+        "content-Type": "application/json",
+      },
+    })
+      .then((data) => data.json())
+      .then((data) => console.log(data));
+  }
 
   if (isLoading) {
     return <p>Loading... </p>;
@@ -103,11 +127,11 @@ export default function ItemsList() {
               <Input
                 placeholder="stocks to add..."
                 type="number"
-                name="amountsInStock"
-                id="amountsInStock"
+                name="stocksAdded"
+                id="stocksAdded"
                 value={amountsInput}
                 onChange={(e) => handleChange(e, index)}
-                onKeyDown={(e) => handleKeyDown(e)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
               />
             </AccordionPanel>
           </AccordionItem>

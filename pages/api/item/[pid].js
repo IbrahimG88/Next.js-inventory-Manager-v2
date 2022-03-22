@@ -6,5 +6,6 @@ export default async (req, res) => {
   const queryId = req.query.pid;
   console.log("queryId", queryId);
   const item = await getSingleDocument(client, "inventory", Number(queryId));
+
   res.json(item);
 };

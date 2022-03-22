@@ -58,7 +58,8 @@ export async function updateDocument(client, collection, testId, stocksToAdd) {
 
   const result = await db
     .collection(collection)
-    .updateOne({ id: testId }, { $inc: { TotalStocks: stocksToAdd } });
-
+    .updateOne({ id: testId }, { $inc: { TotalStocks: 10 } });
+  console.log("result", result);
+  console.log("stocksToAdd", stocksToAdd);
   return result;
 }
