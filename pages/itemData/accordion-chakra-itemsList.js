@@ -15,7 +15,6 @@ export default function ItemsList() {
   const [isLoading, setIsLoading] = useState(false);
   const [filter, setFilter] = useState("");
   let amountsInput;
-
   const router = useRouter();
 
   function handleClick(test, index) {
@@ -91,7 +90,7 @@ export default function ItemsList() {
       {sales
         .filter((f) => f.testName.indexOf(filter) > -1)
         .map((item, index) => (
-          <AccordionItem key={item._id}>
+          <AccordionItem key={item.id}>
             <h2>
               <AccordionButton _expanded={{ bg: "blue", color: "white" }}>
                 <Box flex="1" textAlign="left">

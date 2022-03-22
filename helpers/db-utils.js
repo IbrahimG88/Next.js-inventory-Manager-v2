@@ -52,3 +52,13 @@ export async function getSingleDocument(client, collection, itemId) {
   console.log(document);
   return document;
 }
+
+export async function updateDocument(client, collection, testId, stocksToAdd) {
+  const db = client.db();
+
+  const result = await db
+    .collection(collection)
+    .updateOne({ id: testId }, { $inc: { TotalStocks: stocksToAdd } });
+
+  return result;
+}
