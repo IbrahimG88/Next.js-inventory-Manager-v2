@@ -1,4 +1,4 @@
-import { connectDatabase, updateDocument } from "../../helpers/db-utils";
+import { connectDatabase } from "../../helpers/db-utils";
 //working
 export default async (req, res) => {
   const client = await connectDatabase();
@@ -16,3 +16,4 @@ export default async (req, res) => {
   console.log("item", item);
   res.json(item);
 };
+// try to move function back to db-utils
