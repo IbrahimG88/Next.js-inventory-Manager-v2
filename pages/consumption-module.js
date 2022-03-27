@@ -97,4 +97,5 @@ const OccurrancestrialsPage = ({ res }) => {
 };
 export default OccurrancestrialsPage;
 
-// now get the date form the database
+//now just update the current date in collection for app variables and get it from the databse and test it,
+// thenstart updating the item stocks by dudction from totalStocks

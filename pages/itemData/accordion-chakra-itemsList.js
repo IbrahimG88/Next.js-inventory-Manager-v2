@@ -6,6 +6,7 @@ import {
   AccordionIcon,
   Box,
   Input,
+  Text,
 } from "@chakra-ui/react";
 import { useEffect, useState, Fragment } from "react";
 import { useRouter } from "next/router";
@@ -109,10 +110,10 @@ export default function ItemsList() {
         type="text"
         value={filter}
         placeholder="search for test..."
-        onChange={(event) => setFilter(event.target.value)}
+        onChange={(event) => setFilter(event.target.value.toLowerCase())}
       />
       {sales
-        .filter((f) => f.testName.indexOf(filter) > -1)
+        .filter((f) => f.testName.toLowerCase().indexOf(filter) > -1)
         .map((item, index) => (
           <AccordionItem key={item.id}>
             <h2>
@@ -124,6 +125,7 @@ export default function ItemsList() {
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
+              <Text> Add Stocks:</Text>
               <Input
                 placeholder="stocks to add..."
                 type="number"
