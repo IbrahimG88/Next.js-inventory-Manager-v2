@@ -21,11 +21,11 @@ export const getStaticProps = async () => {
 
   const dateIndividualData = (singleDate) => {
     const dateObject = {
-      day: singleDate.getDate(),
+      day: singleDate.getDate() - 1,
       month: singleDate.getMonth() + 1,
       year: singleDate.getFullYear(),
     };
-
+    console.log("today", dateObject.day);
     return dateObject;
   };
 
@@ -36,7 +36,7 @@ export const getStaticProps = async () => {
       month: now.getMonth() + 1,
       year: now.getFullYear(),
     };
-    console.log("today", dateObject.day);
+    //console.log("today", dateObject.day);
     return dateObject;
   };
 
