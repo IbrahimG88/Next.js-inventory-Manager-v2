@@ -15,7 +15,6 @@ export const getStaticProps = async () => {
 };
 
 const FrequencyWorklist = () => {
-  const result = {};
   const finalArray = [];
 
   const custFreq = panelTypes.reduce((acc, curr) => {
@@ -34,7 +33,7 @@ const FrequencyWorklist = () => {
   return (
     <ul>
       {finalArray.map((item) => (
-        <li key={item.name}>
+        <li key={item.name} suppressHydrationWarning={true}>
           {item.name}:{item.frequency}
         </li>
       ))}
