@@ -74,6 +74,23 @@ const FrequencyWorklist = () => {
     });
   }
 
+  for (const key in finalArray) {
+    console.log(
+      "finalArray[key].name or finalArray[key].name",
+      finalArray[key]
+    );
+
+    fetch("/api/updateItemStocksDeduct", {
+      method: "POST",
+      body: JSON.stringify(finalArray[key]),
+      headers: {
+        "content-Type": "application/json",
+      },
+    })
+      .then((data) => data.json())
+      .then((data) => console.log(data));
+  }
+
   return (
     <ul>
       {finalArray.map((item) => (
