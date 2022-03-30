@@ -52,20 +52,19 @@ export const getStaticProps = async () => {
       return data;
     });
   });
-
-  return {
-    props: { res },
-  };
-};
-
-const FrequencyWorklist = () => {
-  const finalArray = [];
+  for (const key in res) {
+    for (const myItem in res[key].panels) {
+      panelTypes.push(res[key].panels[myItem].report_name);
+    }
+  }
 
   const custFreq = panelTypes.reduce((acc, curr) => {
     acc[curr] = (acc[curr] ?? 0) + 1;
 
     return acc;
   }, {});
+
+  const finalArray = [];
 
   for (const key in custFreq) {
     finalArray.push({
@@ -81,13 +80,20 @@ const FrequencyWorklist = () => {
     headers: {
       "content-Type": "application/json",
     },
-  }).then((data) => data.json());
-  //  .then((data) => console.log("data here", data));
+  })
+    .then((data) => data.json())
+    .then((data) => console.log("data here", data));
 
+  return {
+    props: { finalArray },
+  };
+};
+
+const FrequencyWorklist = ({ finalArray }) => {
   return (
     <ul>
       {finalArray.map((item) => (
-        <li key={item.name} suppressHydrationWarning={true}>
+        <li key={item.name}>
           {item.name}:{item.frequency}
         </li>
       ))}
@@ -95,19 +101,11 @@ const FrequencyWorklist = () => {
   );
 };
 
-const OccurrancestrialsPage = ({ res }) => {
-  for (const key in res) {
-    for (const myItem in res[key].panels) {
-      panelTypes.push(res[key].panels[myItem].report_name);
-    }
-  }
-  // console.log("panelTypes", panelTypes);
-
-  return <FrequencyWorklist />;
-};
-export default OccurrancestrialsPage;
+export default FrequencyWorklist;
 
 //now just update the current date in collection for app variables and get it from the databse and test it,
 // thenstart updating the item stocks by dudction from totalStocks
 
-// the issue all item are being duplicated the frequency: finalArray look  is correct
+// the issue all item are being duplicated the frequency:
+
+// your code is running once on server side and again on client move either all on server or all on client to run it once. move all to getstaticprops
