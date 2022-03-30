@@ -19,3 +19,5 @@ export default async (req, res) => {
   res.json(item);
 };
 // try to move function back to db-utils
+
+// next use min if item below zero $set:{TotalStocks: Number(0)}
