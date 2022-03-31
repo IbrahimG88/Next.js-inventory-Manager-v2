@@ -7,15 +7,13 @@ async function handler(req, res) {
     const testsList = req.body;
 
     for (const key in testsList) {
-      const addItem = await db
-        .collection("inventory")
-        .updateOne(
-          { testName: testsList[key].name },
-          {
-            $set: { id: testsList[key].id, testName: testsList[key].testName },
-          },
-          { upsert: true }
-        );
+      const addItem = await db.collection("inventory").updateOne(
+        { testName: testsList[key].testName },
+        {
+          $set: { id: testsList[key].id, testName: testsList[key].testName },
+        },
+        { upsert: true }
+      );
     }
   }
   res.status(201).json({ message: "All Items Saved" });
