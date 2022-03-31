@@ -8,7 +8,7 @@ async function handler(req, res) {
 
     for (const key in testsList) {
       const addItem = await db.collection("inventory").updateOne(
-        { testName: testsList[key].testName },
+        { id: testsList[key].id, testName: testsList[key].testName },
         {
           $set: { id: testsList[key].id, testName: testsList[key].testName },
         },

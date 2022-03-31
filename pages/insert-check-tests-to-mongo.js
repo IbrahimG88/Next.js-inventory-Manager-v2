@@ -52,6 +52,8 @@ function LoadInventoryFromLIS(props) {
   return (
     <div>
       <button onClick={addInventoryItemHandler}>CLick me to load tests</button>
+      <p>length: {testsList.length}</p>
+
       <ul>
         {testsList.map((test) => (
           <li key={test.id}> {test.testName}</li>
