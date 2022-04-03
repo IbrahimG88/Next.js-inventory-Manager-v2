@@ -39,6 +39,7 @@ export default function ItemsList() {
       [name]: value,
       totalStocks: Number(newSales[i].totalStocks),
       updatedStocks: Number(value) + Number(newSales[i].totalStocks),
+      stocksToAdd: Number(value),
     };
     console.log("newSales", newSales);
     sales = newSales;
@@ -138,8 +139,11 @@ export default function ItemsList() {
                 onChange={(e) => handleChange(e, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
               />
-              {item.updatedStocks ? (
-                <Text>Updated Total Stocks: {item.updatedStocks}</Text>
+              {item.updatedStocks && item.updatedStocks !== null ? (
+                <Text>
+                  Updated Total Stocks: {item.totalStocks} + {item.stocksToAdd}{" "}
+                  = {item.updatedStocks}
+                </Text>
               ) : (
                 <Text>Previous Total Stocks: {item.totalStocks}</Text>
               )}
