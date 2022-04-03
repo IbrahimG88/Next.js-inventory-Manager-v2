@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function BulmaMenu() {
   return (
     <aside className="menu" className="column is-one-quarter">
@@ -13,7 +15,9 @@ export default function BulmaMenu() {
       <p className="menu-label">Administration</p>
       <ul className="menu-list">
         <li>
-          <a>Team Settings</a>
+          <Link href="/accordion-updated">
+            <a>Team Settings</a>
+          </Link>
         </li>
         <li>
           <a className="is-active">Manage Your Team</a>
