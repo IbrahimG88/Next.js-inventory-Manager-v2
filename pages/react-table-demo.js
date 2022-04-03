@@ -133,19 +133,11 @@ useEffect( () => {
 
   return (
 <Fragment>
-    <Input
-    value={filterInputTest}
-    onChange={handleFilterChange}
-    placeholder={"Search testname"}
-  />
-  <Input
-    value={filterInputId}
-    onChange={handleFilterChangeById}
-    placeholder={"Search id"}
-  />
+   
 
     <Table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
-  
+   
+ 
 
 
     <Thead>
@@ -175,6 +167,17 @@ useEffect( () => {
             </Tr>
       ))}
     </Thead>
+    <div style={{display: "flex", "flex-direction": "row"}}>   
+   <Input
+    value={filterInputTest}
+    onChange={handleFilterChange}
+    placeholder={"Search testname"}
+  />
+  <Input
+    value={filterInputId}
+    onChange={handleFilterChangeById}
+    placeholder={"Search id"}
+  /></div>
     <Tbody {...getTableBodyProps()}>
       {rows.map(row => {
         prepareRow(row)
