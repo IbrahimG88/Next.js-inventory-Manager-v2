@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../styles/moreStyles.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import "bulma/css/bulma.min.css";
 import BulmaNavBar from "./Layout/bulma-Navbar";

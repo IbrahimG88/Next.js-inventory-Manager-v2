@@ -50,7 +50,7 @@ export default function ItemsList() {
   const handleKeyDown = (event, index) => {
     if (event.key === "Enter") {
       updateItemHandler(index);
-      event.target.value = "";
+      event.target.value = " ";
     }
   };
 
@@ -139,7 +139,7 @@ export default function ItemsList() {
                 onChange={(e) => handleChange(e, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
               />
-              {item.updatedStocks && item.updatedStocks !== null ? (
+              {item.updatedStocks ? (
                 <Text>
                   Updated Total Stocks: {item.totalStocks} + {item.stocksToAdd}{" "}
                   = {item.updatedStocks}
