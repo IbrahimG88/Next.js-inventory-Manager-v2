@@ -1,3 +1,4 @@
+import { BellIcon } from "@chakra-ui/icons";
 import Link from "next/link";
 import { useState } from "react";
 import {
@@ -43,7 +44,7 @@ export default function BulmaMenu() {
                   setActive(item.label);
                 }}
               >
-                {item.label}
+                <span>{item.label}</span>
               </a>
             </Link>
           </li>
